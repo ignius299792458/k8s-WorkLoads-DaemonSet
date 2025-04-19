@@ -1,0 +1,24 @@
+# Daemonsets process of implementation
+
+Example 
+```
+➜  kubectl apply -f daemonsets.yml 
+daemonset.apps/nginx-daemonsets created
+➜  kubectl get pods -n nginx
+NAME                               READY   STATUS              RESTARTS   AGE
+nginx-daemonsets-6c7m7             1/1     Running             0          15s
+nginx-daemonsets-8s84m             0/1     ContainerCreating   0          15s
+nginx-daemonsets-fj59s             1/1     Running             0          15s
+nginx-deployment-f58b5c699-54ztl   1/1     Running             0          3d17h
+nginx-deployment-f58b5c699-xmpnm   1/1     Running             0          3d17h
+➜  nginx kubectl get pods -n nginx -o wide
+NAME                               READY   STATUS    RESTARTS   AGE     IP            NODE                         NOMINATED NODE   READINESS GATES
+nginx-daemonsets-6c7m7             1/1     Running   0          44s     10.244.3.19   ignius-k8s-cluster-worker3   <none>           <none>
+nginx-daemonsets-8s84m             1/1     Running   0          44s     10.244.1.14   ignius-k8s-cluster-worker    <none>           <none>
+nginx-daemonsets-fj59s             1/1     Running   0          44s     10.244.2.17   ignius-k8s-cluster-worker2   <none>           <none>
+nginx-deployment-f58b5c699-54ztl   1/1     Running   0          3d17h   10.244.1.12   ignius-k8s-cluster-worker    <none>           <none>
+nginx-deployment-f58b5c699-xmpnm   1/1     Running   0          3d17h   10.244.1.13   ignius-k8s-cluster-worker    <none>           <none>
+➜  kubectl delete -f daemonsets.yml 
+daemonset.apps "nginx-daemonsets" deleted
+➜  
+```
